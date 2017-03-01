@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+#main {
+border-radius: 30px 30px 30px 30px;
+ height: 300px;
+    width: 40%;
+	margin: auto;
+    background-color: powderblue;
+border-color: black;
+
+}
+
+#disp {
+
+   
+   
+    margin-top:30px
+    margin-left: 200px;
+}
+
+
+
+</style>
+<script>
+function calculate()
+{
+var txt=document.forms["calc"]["disp"].value;
+var result=eval(txt);
+//alert(result);
+document.forms["calc"]["disp"].value=result;
+
+}
+function display(id){
+var i= document.getElementById(id).value;
+
+var current =  document.forms["calc"]["disp"].value;
+current=current+i;
+document.forms["calc"]["disp"].value=current;
+
+
+
+
+}
+
+
+
+
+
+</script>
+</head>
+<body>
+<div id ="main" >
+
+
+<form name="calc">
+<input type="text" name="disp">
+<table >
+<tr>
+<td><button id="1" type="button" value="1" onclick="display(this.id)">1</button></td>
+<td><button id="2" type="button" value="2" onclick="display(this.id)">2</button></td>
+<td><button id="3" type="button" value="3" onclick="display(this.id)">3</button></td>
+<td><button id="plus" value ="+" type="button" onclick="display(this.id)">+</button></td>
+</tr>
+<tr>
+<td><button id="4" type="button" value="4"onclick="display(this.id)">4</button></td>
+<td><button  id="5" value="5" type="button" onclick="display(this.id)">5</button></td>
+<td><button id="6" value="6" type="button" onclick="display(this.id)">6</button></td>
+<td><button id="minus" value="-" type="button" onclick="display(this.id)">-</button></td>
+</tr>
+<tr>
+<td><button id="7" value="7" type="button" onclick="display(this.id)">7</button></td>
+<td><button id="8" value="8" type="button" onclick="display(this.id)" >8</button></td>
+<td><button id="9" value="9" type="button" onclick="display(this.id)">9</button></td>
+<td><button id="div" value="/" type="button" onclick="display(this.id)">/</button></td>
+</tr>
+<tr>
+<td><button id="0" value="0" type="button" onclick="display(this.id)" >0</button></td>
+<td><button id="C" value="clear" type="button" onclick="calc.disp.value=''">C</button></td>
+<td><button id="mul" value="*" type="button" onclick="display(this.id)">*</button></td>
+<td><button type="button" id="calcr" onclick="calculate( )" >=</button></td>
+</tr>
+
+</table>
+</div>
+
+</form>
+
+</body>
+
+</html>
