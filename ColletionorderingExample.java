@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Comparison;
 
-class Movie implements Comparable<Movie>{
+class Movie {
 	
 	private String name;
 	private String actor;
@@ -35,15 +35,28 @@ class Movie implements Comparable<Movie>{
 		this.actor = actor;
 		this.rating=rating;
 	}
-	public int compareTo(Movie arg0) {
 
-//return getName().compareToIgnoreCase(arg0.getName());
+public static Comparator<Movie> Moviename=new Comparator<Movie>() {
+
+	public int compare(Movie arg0, Movie arg1) {
 	
-		return this.getRating()-arg0.getRating();
 		
+		
+		return arg0.getName().compareTo(arg1.getName());
 	}
 	
+};
 	
+public static Comparator<Movie> Movierating=new Comparator<Movie>() {
+
+	public int compare(Movie arg0, Movie arg1) {
+	
+		
+		
+		return arg0.getRating() - arg1.getRating();
+	}
+	
+};
 }
 
 
@@ -61,7 +74,7 @@ public class ColletionorderingExample {
 		list.add(new Movie("Kahani","Vidya",7));
 		
 		
-		Collections.sort(list);
+		Collections.sort(list,Movie.Moviename);
 		Iterator<Movie> itr=list.iterator();
 		
 		while(itr.hasNext())
@@ -69,7 +82,13 @@ public class ColletionorderingExample {
 			System.out.println(itr.next().getName());
 		}
 		
-
+		Collections.sort(list,Movie.Movierating);
+		Iterator<Movie> itr1=list.iterator();
+		
+		while(itr1.hasNext())
+		{
+			System.out.println(itr1.next().getName());
+		}
 	}
 
 	
