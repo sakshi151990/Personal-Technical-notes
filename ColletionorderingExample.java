@@ -2,9 +2,13 @@ import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Comparison;
+
 
 class Movie {
 	
@@ -68,28 +72,49 @@ public class ColletionorderingExample {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ArrayList<Movie> list=new ArrayList<Movie>();
+		LinkedList<Movie> list=new LinkedList<Movie>();
 		list.add(new Movie("Harry Potter","Emma Watson",9));
 		list.add(new Movie("Tomb Rider","Angelina",8));
 		list.add(new Movie("Kahani","Vidya",7));
+		list.add(new Movie("Kahani","Vidya",7));
+		
+		ArrayList<Movie> list1=new ArrayList<Movie>();
+		list.add(new Movie("Harry Potter","Emma Watson",9));
+		list.add(new Movie("Tomb Rider","Angelina",8));
+		list.add(new Movie("Kahani","Vidya",7));
+		list.add(new Movie("Kahani","Vidya",7));	
+		
+		List<Integer> listnumber=new ArrayList<Integer>();
+		listnumber.add(1);
+		listnumber.add(1);
+		listnumber.add(2);
+		listnumber.add(2);
+		listnumber.add(1);
+		listnumber.add(16);
 		
 		
-		Collections.sort(list,Movie.Moviename);
-		Iterator<Movie> itr=list.iterator();
-		
-		while(itr.hasNext())
-		{
-			System.out.println(itr.next().getName());
+		//merging two lists
+		list1.addAll(list);
+	
+		System.out.println("List after merging the list1");
+		for (Movie movie : list1) {
+			System.out.println(movie.getName());
 		}
+	list.addFirst(new Movie("Tomb Rider","Angelina",8));
+	Set<Integer> set =new HashSet<Integer>(listnumber);
+	listnumber.clear();
+	listnumber.addAll(set);
+	
+	System.out.println("Listnumber after remoing the duplicates :");
+	for (Integer num : listnumber) {
+		System.out.println(num);
 		
-		Collections.sort(list,Movie.Movierating);
-		Iterator<Movie> itr1=list.iterator();
-		
-		while(itr1.hasNext())
-		{
-			System.out.println(itr1.next().getName());
-		}
 	}
+
+		
+	}
+	
+	
 
 	
 
