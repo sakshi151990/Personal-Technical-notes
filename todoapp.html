@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+   <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+   <style type="text/css">
+  
+   </style>
+  </head>
+  <body>
+  <h3>Todo list</h3>
+  <div class="main">
+  <h2>Date: <span id="date"></span></h2>
+  <div class="listdiv">
+ 
+<ol class="todolist">
+
+ </ol>
+ 
+
+
+ </div>
+ <br>
+ <button value="Remove" class ="butt-rem">Remove </button> 
+  <form class="form">
+        <div class="form-container">
+  
+ <input id="addtask" type="text" /> </div>
+ <button class="butt-add" type="submit" value="Add">Add</button>
+
+
+</form>
+
+ 
+  </div>
+  <script type="text/javascript">
+  var taskcount=0;
+  var removearray=0;
+  var d = new Date();
+  var gettask = JSON.parse(localStorage.getItem("myJSON"));
+  
+  var template=function(tasktext)
+  { taskcount=taskcount+1;
+  return '<li>'+tasktext+'<input type="checkbox"></li>';
+  }
+ 
+  var oldtasks=function(){ 
+ 
+
+  for(i=0;i< gettask.length;i++)
+{ 
+var html= template(gettask[i]);
+$(".todolist").append(html);
+ } 
+ 
+}
+  
+  $(document).ready(function(){
+  $('#date').html(d.toDateString());
+  oldtasks();
+
+  $(".butt-add").on('click', function(){
+  
+  var tasktext=$("#addtask").val();
+  gettask.push(tasktext);
+  
+  var html=template(tasktext);
+  $(".todolist").append(html);
+
+  var myJSON = JSON.stringify(gettask);
+  localStorage.setItem("myJSON",myJSON);
+  
+  $("#addtask").empty();  
+  });
+  
+  $('.butt-rem').click(function(){
+   
+    for(i = 0;i< gettask.length;i++)
+{ 
+var rem=$('input:checked').parent().text();
+
+if(gettask[i] === rem)
+{ 
+gettask.splice(i,1);
+ var myJSON = JSON.stringify(gettask);
+  localStorage.setItem("myJSON",myJSON);
+  
+}
+ } 
+
+
+   
+   $('input:checked').parent().remove();
+  });
+});
+  
+ 
+</script>
+  
+  <body>
+  </html>
