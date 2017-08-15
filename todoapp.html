@@ -15,9 +15,6 @@
 <ol class="todolist">
 
  </ol>
- 
-
-
  </div>
  <br>
  <button value="Remove" class ="butt-rem">Remove </button> 
@@ -25,7 +22,7 @@
         <div class="form-container">
   
  <input id="addtask" type="text" /> </div>
- <button class="butt-add" type="submit" value="Add">Add</button>
+ <button class="butt-add" value="Add">Add</button>
 
 
 </form>
@@ -33,20 +30,17 @@
  
   </div>
   <script type="text/javascript">
-  var taskcount=0;
-  var removearray=0;
-  var d = new Date();
-  var gettask = JSON.parse(localStorage.getItem("myJSON"));
+ var d = new Date();
+ 
   
-  var template=function(tasktext)
-  { taskcount=taskcount+1;
-  return '<li>'+tasktext+'<input type="checkbox"></li>';
+    var template = function (tasktext) { 
+  return '<li>' + tasktext + '<input type="checkbox"></li>';
   }
  
-  var oldtasks=function(){ 
+  var oldtasks = function (gettask) { 
  
 
-  for(i=0;i< gettask.length;i++)
+  for(i=0;i < gettask.length;i++)
 { 
 var html= template(gettask[i]);
 $(".todolist").append(html);
@@ -56,14 +50,27 @@ $(".todolist").append(html);
   
   $(document).ready(function(){
   $('#date').html(d.toDateString());
-  oldtasks();
+   var gettask = JSON.parse(localStorage.getItem("myJSON"));
+   
+ if ( gettask != null )
+{
+oldtasks(gettask);
+}
 
   $(".butt-add").on('click', function(){
   
-  var tasktext=$("#addtask").val();
+  var tasktext = $("#addtask").val();
+if ( gettask != null )
+{
+
   gettask.push(tasktext);
-  
-  var html=template(tasktext);
+}
+else 
+{
+gettask = [ tasktext ];
+} 
+  var html = template(tasktext);
+
   $(".todolist").append(html);
 
   var myJSON = JSON.stringify(gettask);
@@ -83,12 +90,8 @@ if(gettask[i] === rem)
 gettask.splice(i,1);
  var myJSON = JSON.stringify(gettask);
   localStorage.setItem("myJSON",myJSON);
-  
-}
+  }
  } 
-
-
-   
    $('input:checked').parent().remove();
   });
 });
