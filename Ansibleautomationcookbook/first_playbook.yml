@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: admin
+  sudo: yes
+  
+  roles:
+  -{role: common, tags: ['common']
+  
+- name: Manage Nginx
+hosts: nginx
+remote_user: "{{ remote_user }}"
+sudo: yes
+roles:
+- { role: nginx, tags: ['nginx'] }
